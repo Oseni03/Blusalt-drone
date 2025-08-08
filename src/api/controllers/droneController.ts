@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import * as droneService from "../services/droneService";
+import * as droneService from "../../services/droneService";
 
 export const registerDrone = async (
 	req: Request,
@@ -34,9 +34,9 @@ export const getLoadedMedications = async (
 	next: NextFunction
 ) => {
 	try {
-		const medications = await droneService.getLoadedMedications(
-			req.params.droneId
-		);
+		const droneId = req.params.droneId;
+		if (!droneId) throw new Error("Drone ID is required");
+		const medications = await droneService.getLoadedMedications(droneId);
 		res.json(medications);
 	} catch (error) {
 		next(error);
@@ -62,7 +62,9 @@ export const getDroneBattery = async (
 	next: NextFunction
 ) => {
 	try {
-		const battery = await droneService.getDroneBattery(req.params.droneId);
+		const droneId = req.params.droneId;
+		if (!droneId) throw new Error("Drone ID is required");
+		const battery = await droneService.getDroneBattery(droneId);
 		res.json({ batteryCapacity: battery });
 	} catch (error) {
 		next(error);
