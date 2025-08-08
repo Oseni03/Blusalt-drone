@@ -21,6 +21,6 @@ export interface Drone {
 	state: DroneState;
 	batteryCapacity: number; // Percentage from 0 to 100
 	medications?: string[]; // Reference to medication IDs
-	createdAt: Date;
-	updatedAt: Date;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
