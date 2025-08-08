@@ -8,7 +8,7 @@ export const registerDrone = async (
 ) => {
 	try {
 		const drone = await droneService.registerDrone(req.body);
-		res.status(201).json(drone);
+		res.status(201).json({ success: true, data: drone });
 	} catch (error) {
 		next(error);
 	}
@@ -22,7 +22,7 @@ export const loadDrone = async (
 	try {
 		const { droneId, medicationIds } = req.body;
 		const drone = await droneService.loadDrone(droneId, medicationIds);
-		res.json(drone);
+		res.json({ success: true, data: drone });
 	} catch (error) {
 		next(error);
 	}
@@ -37,7 +37,7 @@ export const getLoadedMedications = async (
 		const droneId = req.params.droneId;
 		if (!droneId) throw new Error("Drone ID is required");
 		const medications = await droneService.getLoadedMedications(droneId);
-		res.json(medications);
+		res.json({ success: true, data: medications });
 	} catch (error) {
 		next(error);
 	}
@@ -50,7 +50,7 @@ export const getAvailableDrones = async (
 ) => {
 	try {
 		const drones = await droneService.getAvailableDrones();
-		res.json(drones);
+		res.json({ success: true, data: drones });
 	} catch (error) {
 		next(error);
 	}
@@ -65,7 +65,7 @@ export const getDroneBattery = async (
 		const droneId = req.params.droneId;
 		if (!droneId) throw new Error("Drone ID is required");
 		const battery = await droneService.getDroneBattery(droneId);
-		res.json({ batteryCapacity: battery });
+		res.json({ success: true, data: { batteryCapacity: battery } });
 	} catch (error) {
 		next(error);
 	}
