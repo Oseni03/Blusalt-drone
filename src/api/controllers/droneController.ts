@@ -20,7 +20,9 @@ export const loadDrone = async (
 	next: NextFunction
 ) => {
 	try {
-		const { droneId, medicationIds } = req.body;
+		const droneId = req.params.droneId;
+		if (!droneId) throw new Error("Drone ID is required");
+		const { medicationIds } = req.body;
 		const drone = await droneService.loadDrone(droneId, medicationIds);
 		res.json({ success: true, data: drone });
 	} catch (error) {
