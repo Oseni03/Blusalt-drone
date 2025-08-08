@@ -7,7 +7,9 @@ const startServer = async () => {
 	await connectDB();
 	startBatteryCheck();
 	app.listen(config.port, () => {
-		console.log(`Server running on port ${config.port}`);
+		console.log(
+			`Blusalt Drone Service API is running on http://localhost:${config.port}`
+		);
 	});
 };
 
